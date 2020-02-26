@@ -85,32 +85,3 @@ Other directories structures created:
             /var/spool/asterisk: 
             Used for runtime spooled files of voicemail, outgoing calls, etc.
 
-
-Checked out revision 15.
-cc -g -Wall -O2 -D_NBS_PRIVATE -Wmissing-prototypes -Werror -Wno-pointer-sign -D_REENTRANT   -c -o nbsd.o nbsd.c
-nbsd.c: In function ‘merge_stream’:
-nbsd.c:295:29: error: taking address of packed member of ‘struct <anonymous>’ may result in an unaligned pointer value [-Werror=address-of-packed-member]
-  295 |    res = audio_dequeue(ns, h.s, samples);
-      |                            ~^~
-nbsd.c:304:28: error: taking address of packed member of ‘struct <anonymous>’ may result in an unaligned pointer value [-Werror=address-of-packed-member]
-  304 |   res = audio_dequeue(ns, h.s, samples);
-      |                           ~^~
-nbsd.c: In function ‘handle_network’:
-nbsd.c:453:5: error: ‘strncpy’ output may be truncated copying 79 bytes from a string of length 79 [-Werror=stringop-truncation]
-  453 |     strncpy(ns->name, si->streamname, sizeof(ns->name) - 1);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-nbsd.c:454:5: error: ‘strncpy’ output may be truncated copying 15 bytes from a string of length 15 [-Werror=stringop-truncation]
-  454 |     strncpy(ns->app, si->appname, sizeof(ns->app) - 1);
-      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In function ‘audio_acquire’,
-    inlined from ‘merge_stream’ at nbsd.c:276:9,
-    inlined from ‘timing_ready’ at nbsd.c:566:10:
-nbsd.c:221:4: error: ‘strncpy’ output may be truncated copying 79 bytes from a string of length 79 [-Werror=stringop-truncation]
-  221 |    strncpy(ih.i.streamname, ns->name, sizeof(ih.i.streamname) - 1);
-      |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-nbsd.c:222:4: error: ‘strncpy’ output may be truncated copying 15 bytes from a string of length 15 [-Werror=stringop-truncation]
-  222 |    strncpy(ih.i.appname, ns->app, sizeof(ih.i.appname) - 1);
-      |    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-cc1: all warnings being treated as errors
-make: *** [<builtin>: nbsd.o] Error 1
-daniyal@Daniyel:/usr/src/asterisk-13.31.0/contrib/scripts$ sudo ./install_prereq test
